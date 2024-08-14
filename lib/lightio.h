@@ -3,6 +3,9 @@
 #include "lightdata.h"
 
 namespace sipm4eic {
+
+  typedef std::vector<lightdata> hit_vector_t;
+  typedef std::map<std::array<unsigned char, 2>, hit_vector_t> hit_map_t;
   
 class lightio {
 
@@ -91,21 +94,21 @@ class lightio {
   void reset() { spill_current = frame_current = -1; };
 
   
-  std::vector<lightdata> &get_trigger0_vector() { return trigger0_vector; };
-  std::vector<lightdata> &get_trigger1_vector() { return trigger1_vector; };
-  std::vector<lightdata> &get_trigger2_vector() { return trigger2_vector; };
-  std::vector<lightdata> &get_trigger3_vector() { return trigger3_vector; };
-  std::vector<lightdata> &get_timing_vector() { return timing_vector; };
-  std::vector<lightdata> &get_tracking_vector() { return tracking_vector; };
-  std::vector<lightdata> &get_cherenkov_vector() { return cherenkov_vector; };
+  hit_vector_t &get_trigger0_vector() { return trigger0_vector; };
+  hit_vector_t &get_trigger1_vector() { return trigger1_vector; };
+  hit_vector_t &get_trigger2_vector() { return trigger2_vector; };
+  hit_vector_t &get_trigger3_vector() { return trigger3_vector; };
+  hit_vector_t &get_timing_vector() { return timing_vector; };
+  hit_vector_t &get_tracking_vector() { return tracking_vector; };
+  hit_vector_t &get_cherenkov_vector() { return cherenkov_vector; };
 
   unsigned int get_current_spill() { return spill_current; };
   unsigned int get_current_frame() { return frame_current; };
   unsigned int get_current_frame_id() { return frame[frame_current]; };
   
-  std::map<std::array<unsigned char, 2>, std::vector<lightdata>> &get_timing_map() { return timing_map; };
-  std::map<std::array<unsigned char, 2>, std::vector<lightdata>> &get_tracking_map() { return tracking_map; };
-  std::map<std::array<unsigned char, 2>, std::vector<lightdata>> &get_cherenkov_map() { return cherenkov_map; };
+  hit_map_t &get_timing_map() { return timing_map; };
+  hit_map_t &get_tracking_map() { return tracking_map; };
+  hit_map_t &get_cherenkov_map() { return cherenkov_map; };
 
   TTree *get_tree() { return tree; };
   
@@ -125,17 +128,17 @@ class lightio {
   int tracking_offset = 0;
   int cherenkov_offset = 0;
 
-  std::vector<lightdata> trigger0_vector;
-  std::vector<lightdata> trigger1_vector;
-  std::vector<lightdata> trigger2_vector;
-  std::vector<lightdata> trigger3_vector;
-  std::vector<lightdata> timing_vector;
-  std::vector<lightdata> tracking_vector;
-  std::vector<lightdata> cherenkov_vector;
+  hit_vector_t trigger0_vector;
+  hit_vector_t trigger1_vector;
+  hit_vector_t trigger2_vector;
+  hit_vector_t trigger3_vector;
+  hit_vector_t timing_vector;
+  hit_vector_t tracking_vector;
+  hit_vector_t cherenkov_vector;
   
-  std::map<std::array<unsigned char, 2>, std::vector<lightdata>> timing_map;
-  std::map<std::array<unsigned char, 2>, std::vector<lightdata>> tracking_map;
-  std::map<std::array<unsigned char, 2>, std::vector<lightdata>> cherenkov_map;
+  hit_map_t timing_map;
+  hit_map_t tracking_map;
+  hit_map_t cherenkov_map;
   
 };
 
